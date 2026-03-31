@@ -1,1 +1,175 @@
 
+{
+  "manifest_version": 3,
+  "name": "Titan-V6 Orchestrator",
+  "version": "1.0.0",
+  "author": "TechFixer CEO",
+  "description": "Titan-V6 High-Density Orchestrator. Built under Universal Protocol for long-running sessions, team-agent support, and sub-agent orchestration. Engineered for zero-asset execution and 4GB RAM optimization using 600-line logical density.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "scripting",
+    "activeTab",
+    "unlimitedStorage",
+    "background",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "*://api.relayro.xyz/*",
+    "*://*.claude.ai/*",
+    "http://localhost/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Titan-V6 Control Center"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "minimum_chrome_version": "102.0.0",
+  "incognito": "spanning",
+  "offline_enabled": true,
+    "web_accessible_resources": [
+    {
+      "resources": [
+        "index.html",
+        "style.css",
+        "assets/shield.svg",
+        "assets/pulse.svg"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "use_dynamic_url": true
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.claude.ai/*",
+        "https://api.relayro.xyz/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T"
+      },
+      "description": "Open Titan-V6 Control Center"
+    },
+    "toggle-agent": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Toggle Master Agent Pulse"
+    }
+  },
+  "options_page": "index.html",
+  "short_name": "Titan-V6",
+    "externally_connectable": {
+    "ids": ["*"],
+    "matches": [
+      "https://*.claude.ai/*",
+      "https://api.relayro.xyz/*"
+    ],
+    "accepts_tls_channel_id": true
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "titan_ruleset_v6",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "permissions_policy": {
+    "usb": ["self"],
+    "serial": ["self"],
+    "bluetooth": ["self"]
+  },
+  "action_handlers": {
+    "action_type": "handle_launch"
+  },
+  "background_page": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "automation": {
+    "desktop": true,
+    "interact": true
+  },
+    "side_panel": {
+    "default_path": "index.html"
+  },
+  "chrome_settings_overrides": {
+    "homepage": "index.html",
+    "search_provider": {
+      "name": "Titan-Search",
+      "keyword": "titan",
+      "favicon_url": "assets/shield.svg",
+      "search_url": "https://api.relayro.xyz/search?q={searchTerms}",
+      "is_default": false
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "user_scripts": {
+    "execution_world": "USER_SCRIPT"
+  },
+  "runtime": {
+    "on_connect_external": "self",
+    "on_message_external": "self"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "titan-v6@techfixer.pk",
+      "strict_min_version": "100.0"
+    }
+  },
+    "privacy_sandbox": {
+    "use_v1_apis": false,
+    "use_v2_apis": false
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self' https://api.relayro.xyz https://*.claude.ai wss://*.claude.ai"
+  },
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ],
+    "content_security_policy": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+  },
+  "cross_origin_embedder_policy": {
+    "value": "require-corp"
+  },
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  },
+  "cross_origin_resource_policy": {
+    "value": "same-origin"
+  },
+  "export": {
+    "pins": [
+      {
+        "id": "titan_v6_secure_layer",
+        "label": "Titan-V6 Integrity Shield"
+      }
+    ]
+  }
+}
