@@ -199,7 +199,7 @@ _titan_logic_loop_expansion();
  */
 
 const TITAN_NETWORK = {
-    relay_endpoint: "http://api.relayro.xyz/api/v1",
+    relay_endpoint: "ws://localhost:8080",
     claude_socket: null,
     retry_count: 0,
     max_retries: 10,
